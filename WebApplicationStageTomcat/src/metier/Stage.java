@@ -161,8 +161,6 @@ public class Stage {
 				 df  = dateFormatpers.format(this.getDatefin());
 			 String np = Integer.toString(this.nbplaces);
 			 String ni = Integer.toString(this.nbinscrits);
-
-			 
 			 
 			mysql = "SELECT * FROM stages";
 			if(this.getId() != null || this.getLibelle()!= null || dd != null || df != null || this.nbplaces != -1 || this.nbinscrits != -1){
@@ -183,14 +181,10 @@ public class Stage {
 			
 			mysql = mysql + " ORDER BY id ASC";
 
-			
-			
-			System.out.println("SQL : " + mysql);
-
 			rs = DialogueBd.lecture(mysql);
 
 			while (index < rs.size()) {
-				// On crï¿½e un stage
+				// On crée un stage
 				Stage unS = new Stage();
 				// il faut redecouper la liste pour retrouver les lignes
 				unS.setId(rs.get(index + 0).toString());
@@ -202,7 +196,7 @@ public class Stage {
 				unS.setNbplaces(Integer.parseInt(rs.get(index + 4).toString()));
 				unS.setNbinscrits(Integer
 						.parseInt(rs.get(index + 5).toString()));
-				// On incrï¿½mente tous les 6 champs
+				// On incrémente tous les 6 champs
 				index = index + 6;
 				mesStages.add(unS);
 			}

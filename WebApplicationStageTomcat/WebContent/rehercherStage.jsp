@@ -14,21 +14,11 @@
 		if (obj.value != '')
 			alert('Erreur signalée  : "' + obj.value + "'");
 	}
-	function MiseAVide()
-	  {
-		alert("test");
-	  if(document.getElementById("nbinscrits").value == "-1" || 
-	     document.getElementById("nbplaces").value == "-1")
-	       { 
-		  document.getElementById("nbinscrits").value == "";
-		  document.getElementById("nbplaces").value == "";
-	  }
-	  }
 </script>
 </head>
 <body onLoad="Chargement();">
  <P><A href="index.jsp"><FONT face="Arial" color="#004080">Retour Accueil</FONT></A></P>
-	<h1>formulaire de recherche d'un stage</h1>
+	<h1>Formulaire de recherche d'un stage</h1>
 	<br>
 
 	<input type="hidden" name="uneErreur" value="${MesErreurs}"
@@ -74,12 +64,12 @@
 			<tr>
 				<td colspan="2"><input type="submit" name="recherche"
 					value="Recherche" /> &nbsp;&nbsp; <input type="reset" name="reset"
-					value="Reset" onclick="MiseAVide();" /></td>
+					value="Reset" /></td>
 			</tr>
 		</table>
 	</form>
 
-	<STRONG>Listing&nbsp;des Stages </STRONG>
+	<STRONG>Résultat(s) de la recherche : </STRONG>
 	</U>
 	</FONT>
 	</P>

@@ -93,18 +93,8 @@ public class Controleur extends HttpServlet {
 			}
 
 		} else if (RECHERCHER_STAGE.equals(actionName)) {
-//			try {
 				request.setAttribute("rechercherStage", 1);
-				Stage unStage = new Stage();
-//				listeStages = unStage.rechercheLesStages(); //grise
-//				request.setAttribute("liste", listeStages);
 				destinationPage = "/rehercherStage.jsp";
-//			} catch (MonException e) {
-//				request.setAttribute("MesErreurs", e.getMessage());
-//				destinationPage = "/Erreur.jsp";
-//
-//			}
-
 		} else if (CHERCHER_STAGE.equals(actionName)) {
 			try {
 				request.setAttribute("rechercherStage", 1);
