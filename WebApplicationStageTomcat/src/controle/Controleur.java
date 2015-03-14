@@ -110,8 +110,7 @@ public class Controleur extends HttpServlet {
 				request.setAttribute("rechercherStage", 1);
 				Stage unStage = new Stage();
 				request.setAttribute("stage", unStage);
-<<<<<<< HEAD
-				
+
 				// Récupération des attributs de la recherche
 				if(request.getParameter("id") != "")
 					unStage.setId(request.getParameter("id"));
@@ -136,22 +135,7 @@ public class Controleur extends HttpServlet {
 				}else{
 					unStage.setNbinscrits(-1);
 				}
-=======
-
-				unStage.setId(request.getParameter("id"));
-				// unStage.setLibelle(request.getParameter("libelle"));
-				// unStage.setDatedebut(conversionChaineenDate(
-				// request.getParameter("datedebut"), "yyyy/MM/dd"));
-				// unStage.setDatefin(conversionChaineenDate(
-				// request.getParameter("datefin"), "yyyy/MM/dd"));
-				// unStage.setNbplaces(Integer.parseInt(request
-				// .getParameter("nbplaces")));
-				// unStage.setNbinscrits(Integer.valueOf(
-				// (request.getParameter("nbplaces"))).intValue());
-				// unStage.setNbinscrits(Integer.parseInt((request
-				// .getParameter("nbinscrits"))));
->>>>>>> branch 'master' of https://github.com/FaCoInf/Stage.git
-
+				
 				listeStages = unStage.rechercheDesStages();
 				request.setAttribute("liste", listeStages);
 //				unStage = new Stage();
@@ -195,12 +179,8 @@ public class Controleur extends HttpServlet {
 			unStage.setId(request.getParameter("id"));
 			unStage.supprimerStage();
 			destinationPage = "/index.jsp";
-<<<<<<< HEAD
-		}// Redirection vers la page jsp appropriee
-=======
 		}
 		// Redirection vers la page jsp appropriee
->>>>>>> branch 'master' of https://github.com/FaCoInf/Stage.git
 		RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher(destinationPage);
 		dispatcher.forward(request, response);

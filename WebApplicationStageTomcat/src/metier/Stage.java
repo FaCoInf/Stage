@@ -213,7 +213,7 @@ public class Stage {
 			throw e;
 		}
 	}
-	
+
 	public void modifierStage() throws MonException, ParseException {
 		String mysql = "";
 		DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
@@ -235,7 +235,7 @@ public class Stage {
 		String mysql = "DELETE FROM stages WHERE id = "+this.id;
 		DialogueBd.insertionBD(mysql);
 	}
-	
+
 	private String ajoutElementSQL(String type, String sql, String element, String valeur,boolean isString){
 	
 		// On récupère les derniers caractères 
@@ -253,28 +253,6 @@ public class Stage {
 		}
 		
 		return sql;
-	}
-
-	public void modifierStage() throws MonException, ParseException {
-		String mysql = "";
-		DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
-		String dd = dateFormatpers.format(this.getDatedebut());
-		String df = dateFormatpers.format(this.getDatefin());
-		mysql += "UPDATE stages SET" 
-				+ " libelle = '" + this.libelle + "'," 
-				+ " datedebut = '" + dd + "',"
-				+ " datefin = '" + df + "'," 
-				+ " nbplaces = '"+ this.nbplaces + "'," 
-				+ " nbinscrits = '" + this.nbinscrits+ "'"
-				+ " WHERE id = " + this.id;
-
-		DialogueBd.insertionBD(mysql);
-
-	}
-	
-	public void supprimerStage() throws MonException{
-		String mysql = "DELETE FROM stages WHERE id = "+this.id;
-		DialogueBd.insertionBD(mysql);
 	}
 
 }
