@@ -25,15 +25,17 @@ public class Controleur extends HttpServlet {
 	private static final String RECHERCHER_STAGE = "rechercheStage";
 	private static final String CHERCHER_STAGE = "chercheStage";
 	private static final String AJOUT_STAGE = "ajoutStage";
+	private static final String SAISIE_MODIFIER_STAGE = "saisieModifierStage";
 	private static final String MODIFIER_STAGE = "modifierStage";
+	private static final String SUPPRIMER_STAGE = "supprimerStage";
 	private static final String ERROR_PAGE = null;
 
-	// le format est une combinaison de MM dd yyyy avec / ou –
+	// le format est une combinaison de MM dd yyyy avec / ou ï¿½
 	// exemple dd/MM/yyyy
 	public Date conversionChaineenDate(String unedate, String unformat)
 			throws Exception {
 		Date datesortie;
-		// on définit un format de sortie
+		// on dï¿½finit un format de sortie
 		SimpleDateFormat defFormat = new SimpleDateFormat(unformat);
 		datesortie = defFormat.parse(unedate);
 		return datesortie;
@@ -107,19 +109,19 @@ public class Controleur extends HttpServlet {
 				request.setAttribute("rechercherStage", 1);
 				Stage unStage = new Stage();
 				request.setAttribute("stage", unStage);
-				
+
 				unStage.setId(request.getParameter("id"));
-//				unStage.setLibelle(request.getParameter("libelle"));
-//				unStage.setDatedebut(conversionChaineenDate(
-//						request.getParameter("datedebut"), "yyyy/MM/dd"));
-//				unStage.setDatefin(conversionChaineenDate(
-//						request.getParameter("datefin"), "yyyy/MM/dd"));
-//				unStage.setNbplaces(Integer.parseInt(request
-//						.getParameter("nbplaces")));
-//				unStage.setNbinscrits(Integer.valueOf(
-//						(request.getParameter("nbplaces"))).intValue());
-//				unStage.setNbinscrits(Integer.parseInt((request
-//						.getParameter("nbinscrits"))));
+				// unStage.setLibelle(request.getParameter("libelle"));
+				// unStage.setDatedebut(conversionChaineenDate(
+				// request.getParameter("datedebut"), "yyyy/MM/dd"));
+				// unStage.setDatefin(conversionChaineenDate(
+				// request.getParameter("datefin"), "yyyy/MM/dd"));
+				// unStage.setNbplaces(Integer.parseInt(request
+				// .getParameter("nbplaces")));
+				// unStage.setNbinscrits(Integer.valueOf(
+				// (request.getParameter("nbplaces"))).intValue());
+				// unStage.setNbinscrits(Integer.parseInt((request
+				// .getParameter("nbinscrits"))));
 
 				listeStages = unStage.rechercheDesStages();
 				request.setAttribute("liste", listeStages);
@@ -131,13 +133,35 @@ public class Controleur extends HttpServlet {
 
 			}
 
-		}// Redirection vers la page jsp appropriee
+		} else if (SAISIE_MODIFIER_STAGE.equals(actionName)) {
+			System.out.println("Saisie Modifier stage");
+			request.setAttribute("stage", new Stage());
+			destinationPage = "/modificationStage.jsp";
+		} else if (MODIFIER_STAGE.equals(actionName)) {
+			System.out.println("Modifier stage");
+			Stage unStage = new Stage();
+			unStage.setId(request.getParameter("id"));
+			unStage.setLibelle(request.getParameter("libelle"));
+			unStage.setDatedebut(conversionChaineenDate(
+					request.getParameter("datedebut"), "yyyy/MM/dd"));
+			unStage.setDatefin(conversionChaineenDate(
+					request.getParameter("datefin"), "yyyy/MM/dd"));
+			unStage.setNbplaces(Integer.parseInt(request
+					.getParameter("nbplaces")));
+			unStage.setNbinscrits(Integer.valueOf(
+					(request.getParameter("nbplaces"))).intValue());
+			unStage.setNbinscrits(Integer.valueOf(
+					(request.getParameter("nbinscrits"))).intValue());
+			unStage.modifierStage();
+			destinationPage = "/index.jsp";
+		}
+		// Redirection vers la page jsp appropriee
 		RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher(destinationPage);
 		dispatcher.forward(request, response);
 	}
 
-	// L’appel de cette procédure se fait avec :
+	// Lï¿½appel de cette procï¿½dure se fait avec :
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
