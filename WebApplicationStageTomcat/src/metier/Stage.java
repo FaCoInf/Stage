@@ -86,7 +86,7 @@ public class Stage {
 		this.datefin = datefin;
 	}
 
-	/* traitements métier */
+	/* traitements mï¿½tier */
 
 	public void insertionStage() throws MonException {
 
@@ -96,13 +96,11 @@ public class Stage {
 			String dd = dateFormatpers.format(this.getDatedebut());
 			String df = dateFormatpers.format(this.getDatefin());
 
-			mysql = "INSERT INTO stages (id, libelle, datedebut ,";
-			mysql = mysql + " datefin, nbplaces, nbinscrits) ";
-			mysql = mysql + " VALUES ( \'" + this.getId() + "\', \'"
-					+ this.getLibelle() + "\', ";
-			mysql = mysql + "\' " + dd + "\', " + "\' " + df + "\', ";
-			mysql = mysql + this.getNbplaces() + ", " + this.getNbinscrits()
-					+ " )";
+			mysql = "INSERT INTO stages (id, libelle, datedebut ,"
+					+ " datefin, nbplaces, nbinscrits) " + " VALUES ( \'"
+					+ this.getId() + "\', \'" + this.getLibelle() + "\', "
+					+ "\' " + dd + "\', " + "\' " + df + "\', "
+					+ this.getNbplaces() + ", " + this.getNbinscrits() + " )";
 			DialogueBd.insertionBD(mysql);
 		} catch (MonException e) {
 			throw e;
@@ -121,7 +119,7 @@ public class Stage {
 			rs = DialogueBd.lecture(mysql);
 
 			while (index < rs.size()) {
-				// On crée un stage
+				// On crï¿½e un stage
 				Stage unS = new Stage();
 				// il faut redecouper la liste pour retrouver les lignes
 				unS.setId(rs.get(index + 0).toString());
@@ -134,7 +132,7 @@ public class Stage {
 				unS.setNbplaces(Integer.parseInt(rs.get(index + 4).toString()));
 				unS.setNbinscrits(Integer
 						.parseInt(rs.get(index + 5).toString()));
-				// On incrémente tous les 6 champs
+				// On incrï¿½mente tous les 6 champs
 				index = index + 6;
 				mesStages.add(unS);
 			}
@@ -192,7 +190,7 @@ public class Stage {
 			rs = DialogueBd.lecture(mysql);
 
 			while (index < rs.size()) {
-				// On crée un stage
+				// On crï¿½e un stage
 				Stage unS = new Stage();
 				// il faut redecouper la liste pour retrouver les lignes
 				unS.setId(rs.get(index + 0).toString());
@@ -204,7 +202,7 @@ public class Stage {
 				unS.setNbplaces(Integer.parseInt(rs.get(index + 4).toString()));
 				unS.setNbinscrits(Integer
 						.parseInt(rs.get(index + 5).toString()));
-				// On incrémente tous les 6 champs
+				// On incrï¿½mente tous les 6 champs
 				index = index + 6;
 				mesStages.add(unS);
 			}
@@ -256,4 +254,27 @@ public class Stage {
 		
 		return sql;
 	}
+
+	public void modifierStage() throws MonException, ParseException {
+		String mysql = "";
+		DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
+		String dd = dateFormatpers.format(this.getDatedebut());
+		String df = dateFormatpers.format(this.getDatefin());
+		mysql += "UPDATE stages SET" 
+				+ " libelle = '" + this.libelle + "'," 
+				+ " datedebut = '" + dd + "',"
+				+ " datefin = '" + df + "'," 
+				+ " nbplaces = '"+ this.nbplaces + "'," 
+				+ " nbinscrits = '" + this.nbinscrits+ "'"
+				+ " WHERE id = " + this.id;
+
+		DialogueBd.insertionBD(mysql);
+
+	}
+	
+	public void supprimerStage() throws MonException{
+		String mysql = "DELETE FROM stages WHERE id = "+this.id;
+		DialogueBd.insertionBD(mysql);
+	}
+
 }
