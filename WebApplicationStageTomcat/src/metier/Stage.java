@@ -20,6 +20,12 @@ public class Stage {
 	public Stage() {
 
 		// TODO Auto-generated constructor stub
+		this.id = null;
+		this.libelle = null;
+		this.datedebut = null;
+		this.datefin = null;
+//		this.nbplaces = -1;
+//		this.nbinscrits = -1;
 	}
 
 	public Stage(String id, String libelle, Date datedebut, Date datefin,
@@ -149,28 +155,38 @@ public class Stage {
 		try {
 
 			String mysql = "";
-			// DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
-			// String dd = dateFormatpers.format(this.getDatedebut());
-			// String df = dateFormatpers.format(this.getDatefin());
-			// String np = Integer.toString(this.nbplaces);
-			// String ni = Integer.toString(this.nbinscrits);
+			 DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
+			 String dd = null, df =null;
+			 if(this.getDatedebut() !=null)
+				 dd = dateFormatpers.format(this.getDatedebut());
+			 if(this.getDatefin() !=null)
+				 df  = dateFormatpers.format(this.getDatefin());
+			 String np = Integer.toString(this.nbplaces);
+			 String ni = Integer.toString(this.nbinscrits);
 
-			mysql = "SELECT * FROM stages"; // WHERE ";
-			if (this.getId() != "" && this.getId() != null)
-				mysql = mysql + " WHERE id=" + this.getId();
-			// if( this.getLibelle()!= null){
-			// mysql = mysql + "libelle=" + this.getLibelle();
-			// }
-			// if(dd != null){
-			// mysql = mysql + " datedebut="+ dd;
-			// if(df != null)
-			// mysql = mysql + " datefin="+ df;
-			// if(np != null)
-			// mysql = mysql + " nbplaces="+ this.nbplaces;
-			// if(ni != null)
-			// mysql = mysql + " nbinscrits="+ this.nbinscrits;
+			 
+			 
+			mysql = "SELECT * FROM stages";
+			if(this.getId() != null || this.getLibelle()!= null || dd != null || df != null || this.nbplaces != -1 || this.nbinscrits != -1){
+				mysql = mysql + " WHERE ";
+				if (this.getId() != null)
+					mysql = this.ajoutElementSQL("WHERE ", mysql, "id", this.getId(),false);
+				if( this.getLibelle()!= null)
+					mysql = this.ajoutElementSQL("WHERE ", mysql,  "libelle", this.getLibelle(),true);
+				if(this.getDatedebut() != null)
+					mysql = this.ajoutElementSQL("WHERE ", mysql,  "datedebut", dd,true);
+				if(this.getDatefin() != null)
+					mysql = this.ajoutElementSQL("WHERE ", mysql,  "datefin", df,true);
+				if(this.nbplaces != -1)
+					mysql = this.ajoutElementSQL("WHERE ", mysql,  "nbplaces", np,false);
+				if(this.nbinscrits != -1)
+					mysql = this.ajoutElementSQL("WHERE ", mysql,  "nbinscrits", ni,false);
+			}
+			
 			mysql = mysql + " ORDER BY id ASC";
 
+			
+			
 			System.out.println("SQL : " + mysql);
 
 			rs = DialogueBd.lecture(mysql);
@@ -181,7 +197,6 @@ public class Stage {
 				// il faut redecouper la liste pour retrouver les lignes
 				unS.setId(rs.get(index + 0).toString());
 				unS.setLibelle(rs.get(index + 1).toString());
-				DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
 				unS.setDatedebut(dateFormatpers.parse(rs.get(index + 2)
 						.toString()));
 				unS.setDatefin((dateFormatpers.parse(rs.get(index + 3)
@@ -199,6 +214,46 @@ public class Stage {
 		} catch (MonException e) {
 			throw e;
 		}
+	}
+	
+	public void modifierStage() throws MonException, ParseException {
+		String mysql = "";
+		DateFormat dateFormatpers = new SimpleDateFormat("yyyy-MM-dd");
+		String dd = dateFormatpers.format(this.getDatedebut());
+		String df = dateFormatpers.format(this.getDatefin());
+		mysql += "UPDATE stages SET" 
+				+ " libelle = '" + this.libelle + "'," 
+				+ " datedebut = '" + dd + "',"
+				+ " datefin = '" + df + "'," 
+				+ " nbplaces = '"+ this.nbplaces + "'," 
+				+ " nbinscrits = '" + this.nbinscrits+ "'"
+				+ " WHERE id = " + this.id;
 
+		DialogueBd.insertionBD(mysql);
+
+	}
+	
+	public void supprimerStage() throws MonException{
+		String mysql = "DELETE FROM stages WHERE id = "+this.id;
+		DialogueBd.insertionBD(mysql);
+	}
+	
+	private String ajoutElementSQL(String type, String sql, String element, String valeur,boolean isString){
+	
+		// On récupère les derniers caractères 
+		String derniersCar = sql.substring(sql.length() - 6);
+		
+		if(derniersCar.equals(type)){
+			sql = sql+element+"=";
+		}else{
+			sql = sql+" AND "+element+"=";
+		}
+		if(isString == true){
+			sql = sql+"\'"+valeur+"\'";
+		}else{
+			sql = sql+valeur;
+		}
+		
+		return sql;
 	}
 }

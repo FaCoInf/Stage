@@ -9,31 +9,31 @@
 <title>Rechercher un stage</title>
 
 <script language=javascript>
-// 	function verif() {
-// 		if (document.getElementById("id").value == ""
-// // 				&& document.getElementById("libelle").value == ""
-// // 				&& document.getElementById("datedebut").value == ""
-// // 				&& document.getElementById("datefin").value == ""
-// ) {
-// // 			alert("Aucun champs n'est rempli !");
-// 			return false;
-// 		} else
-// 			return true;
-// 	}
 	function Chargement() {
 		var obj = document.getElementById("id_erreur");
 		if (obj.value != '')
 			alert('Erreur signalée  : "' + obj.value + "'");
 	}
+	function MiseAVide()
+	  {
+		alert("test");
+	  if(document.getElementById("nbinscrits").value == "-1" || 
+	     document.getElementById("nbplaces").value == "-1")
+	       { 
+		  document.getElementById("nbinscrits").value == "";
+		  document.getElementById("nbplaces").value == "";
+	  }
+	  }
 </script>
 </head>
 <body onLoad="Chargement();">
+ <P><A href="index.jsp"><FONT face="Arial" color="#004080">Retour Accueil</FONT></A></P>
 	<h1>formulaire de recherche d'un stage</h1>
 	<br>
 
 	<input type="hidden" name="uneErreur" value="${MesErreurs}"
 		id="id_erreur">
-	<form method="post" action="Controleur"><!-- 	 onsubmit="return verif();"> -->
+	<form method="post" action="Controleur">
 		<input type="hidden" name="type" value="cherche" id="type" /> <input
 			type="hidden" name="action" value="chercheStage" />
 		<table>
@@ -42,37 +42,39 @@
 				<td>Numéro</td>
 				<td><input type="text" name="id" value="${stage.id}" id="id" /></td>
 			</tr>
-<!-- 			<tr> -->
-<!-- 				<td>Libellé</td> -->
-<%-- 				<td><input type="text" name="libelle" value="${stage.libelle}" --%>
-<!-- 					id="libelle" /></td> -->
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>Date de début du stage</td> -->
-<!-- 				<td><input type="text" name="datedebut" -->
-<%-- 					value="${stage.datedebut}" id="datedebut" /></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>Date de fin de stage</td> -->
-<%-- 				<td><input type="text" name="datefin" value="${stage.datefin}" --%>
-<!-- 					id="datefin" /></td> -->
-<!-- 			</tr> -->
+			<tr>
+				<td>Libellé</td>
+				<td><input type="text" name="libelle" value="${stage.libelle}"
+					id="libelle" /></td>
+			</tr>
+			<tr>
+				<td>Date de début du stage</td>
+				<td><input type="text" name="datedebut"
+					value="<fmt:formatDate type="both" dateStyle="short"
+						timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />" id="datedebut"/></td>
+			</tr>
+			<tr>
+				<td>Date de fin de stage</td>
+				<td><input type="text" name="datefin" value="<fmt:formatDate type="both" dateStyle="short"
+						timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
+					id="datefin" /></td>
+			</tr>
 
-<!-- 			<tr> -->
-<!-- 				<td>Nombre de places</td> -->
-<!-- 				<td><input type="text" name="nbplaces" -->
-<%-- 					value="${stage.nbplaces}" id="nbplaces" /></td> --%>
-<!-- 			</tr> -->
-<!-- 			<tr> -->
-<!-- 				<td>Nombre d'inscrits</td> -->
-<!-- 				<td><input type="text" name="nbinscrits" -->
-<%-- 					value="${stage.nbinscrits}" id="nbinscrits" /></td> --%>
-<!-- 			</tr> -->
+			<tr>
+				<td>Nombre de places</td>
+				<td><input type="text" name="nbplaces"
+					value="" id="nbplaces" /></td>
+			</tr>
+			<tr>
+				<td>Nombre d'inscrits</td>
+				<td><input type="text" name="nbinscrits"
+					value="" id="nbinscrits" /></td>
+			</tr>
 			<!-- Boutons Ajouter/Reset -->
 			<tr>
 				<td colspan="2"><input type="submit" name="recherche"
 					value="Recherche" /> &nbsp;&nbsp; <input type="reset" name="reset"
-					value="Reset" /></td>
+					value="Reset" onclick="MiseAVide();" /></td>
 			</tr>
 		</table>
 	</form>

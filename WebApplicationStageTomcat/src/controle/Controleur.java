@@ -1,6 +1,7 @@
 package controle;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -25,7 +26,10 @@ public class Controleur extends HttpServlet {
 	private static final String RECHERCHER_STAGE = "rechercheStage";
 	private static final String CHERCHER_STAGE = "chercheStage";
 	private static final String AJOUT_STAGE = "ajoutStage";
+	private static final String SAISIE_MODIFIER_STAGE = "saisieModifierStage";
 	private static final String MODIFIER_STAGE = "modifierStage";
+	private static final String SAISIE_SUPPRIMER_STAGE = "saisieSupprimerStage";
+	private static final String SUPPRIMER_STAGE = "supprimerStage";
 	private static final String ERROR_PAGE = null;
 
 	// le format est une combinaison de MM dd yyyy avec / ou –
@@ -36,6 +40,7 @@ public class Controleur extends HttpServlet {
 		// on définit un format de sortie
 		SimpleDateFormat defFormat = new SimpleDateFormat(unformat);
 		datesortie = defFormat.parse(unedate);
+		 
 		return datesortie;
 	}
 
@@ -58,9 +63,9 @@ public class Controleur extends HttpServlet {
 				unStage.setId(request.getParameter("id"));
 				unStage.setLibelle(request.getParameter("libelle"));
 				unStage.setDatedebut(conversionChaineenDate(
-						request.getParameter("datedebut"), "yyyy/MM/dd"));
+						request.getParameter("datedebut"), "dd/MM/yyyy"));
 				unStage.setDatefin(conversionChaineenDate(
-						request.getParameter("datefin"), "yyyy/MM/dd"));
+						request.getParameter("datefin"), "dd/MM/yyyy"));
 				unStage.setNbplaces(Integer.parseInt(request
 						.getParameter("nbplaces")));
 				unStage.setNbinscrits(Integer.valueOf(
@@ -88,42 +93,54 @@ public class Controleur extends HttpServlet {
 			}
 
 		} else if (RECHERCHER_STAGE.equals(actionName)) {
-			try {
-				System.out.println("Test : RECHERCHER_STAGE");
+//			try {
 				request.setAttribute("rechercherStage", 1);
 				Stage unStage = new Stage();
-				listeStages = unStage.rechercheLesStages();
-				request.setAttribute("liste", listeStages);
+//				listeStages = unStage.rechercheLesStages(); //grise
+//				request.setAttribute("liste", listeStages);
 				destinationPage = "/rehercherStage.jsp";
-			} catch (MonException e) {
-				request.setAttribute("MesErreurs", e.getMessage());
-				destinationPage = "/Erreur.jsp";
-
-			}
+//			} catch (MonException e) {
+//				request.setAttribute("MesErreurs", e.getMessage());
+//				destinationPage = "/Erreur.jsp";
+//
+//			}
 
 		} else if (CHERCHER_STAGE.equals(actionName)) {
 			try {
-				System.out.println("Test : CHERCHER_STAGE");
 				request.setAttribute("rechercherStage", 1);
 				Stage unStage = new Stage();
 				request.setAttribute("stage", unStage);
 				
-				unStage.setId(request.getParameter("id"));
-//				unStage.setLibelle(request.getParameter("libelle"));
-//				unStage.setDatedebut(conversionChaineenDate(
-//						request.getParameter("datedebut"), "yyyy/MM/dd"));
-//				unStage.setDatefin(conversionChaineenDate(
-//						request.getParameter("datefin"), "yyyy/MM/dd"));
-//				unStage.setNbplaces(Integer.parseInt(request
-//						.getParameter("nbplaces")));
-//				unStage.setNbinscrits(Integer.valueOf(
-//						(request.getParameter("nbplaces"))).intValue());
-//				unStage.setNbinscrits(Integer.parseInt((request
-//						.getParameter("nbinscrits"))));
+				// Récupération des attributs de la recherche
+				if(request.getParameter("id") != "")
+					unStage.setId(request.getParameter("id"));
+				if(request.getParameter("libelle") != "")
+					unStage.setLibelle(request.getParameter("libelle"));
+				if(request.getParameter("datedebut") != "")
+					unStage.setDatedebut(conversionChaineenDate(
+						request.getParameter("datedebut"), "dd/MM/yyyy"));
+				if(request.getParameter("datefin") != "")
+					unStage.setDatefin(conversionChaineenDate(
+						request.getParameter("datefin"), "dd/MM/yyyy"));
+				if(request.getParameter("nbplaces") != ""){
+					unStage.setNbplaces(Integer.parseInt(request
+						.getParameter("nbplaces")));
+				}else
+				{
+					unStage.setNbplaces(-1);
+				}
+				if(request.getParameter("nbinscrits") != ""){
+					unStage.setNbinscrits(Integer.parseInt((request
+						.getParameter("nbinscrits"))));
+				}else{
+					unStage.setNbinscrits(-1);
+				}
 
 				listeStages = unStage.rechercheDesStages();
 				request.setAttribute("liste", listeStages);
-
+//				unStage = new Stage();
+//				request.setAttribute("stage", unStage);
+				
 				destinationPage = "/rehercherStage.jsp";
 			} catch (MonException e) {
 				request.setAttribute("MesErreurs", e.getMessage());
@@ -131,6 +148,37 @@ public class Controleur extends HttpServlet {
 
 			}
 
+		} else if (SAISIE_MODIFIER_STAGE.equals(actionName)) {
+			System.out.println("Saisie Modifier stage");
+			request.setAttribute("stage", new Stage());
+			destinationPage = "/modificationStage.jsp";
+		} else if (MODIFIER_STAGE.equals(actionName)) {
+			System.out.println("Modifier stage");
+			Stage unStage = new Stage();
+			unStage.setId(request.getParameter("id"));
+			unStage.setLibelle(request.getParameter("libelle"));
+			unStage.setDatedebut(conversionChaineenDate(
+					request.getParameter("datedebut"), "yyyy/MM/dd"));
+			unStage.setDatefin(conversionChaineenDate(
+					request.getParameter("datefin"), "yyyy/MM/dd"));
+			unStage.setNbplaces(Integer.parseInt(request
+					.getParameter("nbplaces")));
+			unStage.setNbinscrits(Integer.valueOf(
+					(request.getParameter("nbplaces"))).intValue());
+			unStage.setNbinscrits(Integer.valueOf(
+					(request.getParameter("nbinscrits"))).intValue());
+			unStage.modifierStage();
+			destinationPage = "/index.jsp";
+		}else if(SAISIE_SUPPRIMER_STAGE.equals(actionName)){
+			System.out.println("Saisie supprimer stage");
+			request.setAttribute("stage", new Stage());
+			destinationPage = "/suppressionStage.jsp";
+		}else if(SUPPRIMER_STAGE.equals(actionName)){
+			System.out.println("Supprimer stage");
+			Stage unStage = new Stage();
+			unStage.setId(request.getParameter("id"));
+			unStage.supprimerStage();
+			destinationPage = "/index.jsp";
 		}// Redirection vers la page jsp appropriee
 		RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher(destinationPage);
