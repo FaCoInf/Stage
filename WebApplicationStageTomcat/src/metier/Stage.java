@@ -216,5 +216,10 @@ public class Stage {
 		DialogueBd.insertionBD(mysql);
 
 	}
+	
+	public void supprimerStage() throws MonException{
+		String mysql = "DELETE FROM stages WHERE id = "+this.id;
+		DialogueBd.insertionBD(mysql);
+	}
 
 }

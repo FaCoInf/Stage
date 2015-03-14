@@ -27,6 +27,7 @@ public class Controleur extends HttpServlet {
 	private static final String AJOUT_STAGE = "ajoutStage";
 	private static final String SAISIE_MODIFIER_STAGE = "saisieModifierStage";
 	private static final String MODIFIER_STAGE = "modifierStage";
+	private static final String SAISIE_SUPPRIMER_STAGE = "saisieSupprimerStage";
 	private static final String SUPPRIMER_STAGE = "supprimerStage";
 	private static final String ERROR_PAGE = null;
 
@@ -153,6 +154,16 @@ public class Controleur extends HttpServlet {
 			unStage.setNbinscrits(Integer.valueOf(
 					(request.getParameter("nbinscrits"))).intValue());
 			unStage.modifierStage();
+			destinationPage = "/index.jsp";
+		}else if(SAISIE_SUPPRIMER_STAGE.equals(actionName)){
+			System.out.println("Saisie supprimer stage");
+			request.setAttribute("stage", new Stage());
+			destinationPage = "/suppressionStage.jsp";
+		}else if(SUPPRIMER_STAGE.equals(actionName)){
+			System.out.println("Supprimer stage");
+			Stage unStage = new Stage();
+			unStage.setId(request.getParameter("id"));
+			unStage.supprimerStage();
 			destinationPage = "/index.jsp";
 		}
 		// Redirection vers la page jsp appropriee

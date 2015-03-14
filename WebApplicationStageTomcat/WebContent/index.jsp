@@ -12,6 +12,7 @@
       <li><a href="Controleur?action=afficheStage">Affichage liste des stages</a></li>
        <li><a href="Controleur?action=rechercheStage">Recherche d'un stage</a></li>  
        <li><a href="Controleur?action=saisieModifierStage">Modifier un stage</a></li>  
+       <li><a href="Controleur?action=saisieSupprimerStage">supprimer un stage</a></li>  
   </ul>
 </div>
 </body>
