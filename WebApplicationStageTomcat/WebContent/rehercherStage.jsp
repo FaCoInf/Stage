@@ -9,16 +9,17 @@
 <title>Rechercher un stage</title>
 
 <script language=javascript>
-	function verif() {
-		if (document.getElementById("id").value == ""
-				|| document.getElementById("libelle").value == ""
-				|| document.getElementById("datedebut").value == ""
-				|| document.getElementById("datefin").value == "") {
-			alert("Un des champs n'est pas rempli !");
-			return false;
-		} else
-			return true;
-	}
+// 	function verif() {
+// 		if (document.getElementById("id").value == ""
+// // 				&& document.getElementById("libelle").value == ""
+// // 				&& document.getElementById("datedebut").value == ""
+// // 				&& document.getElementById("datefin").value == ""
+// ) {
+// // 			alert("Aucun champs n'est rempli !");
+// 			return false;
+// 		} else
+// 			return true;
+// 	}
 	function Chargement() {
 		var obj = document.getElementById("id_erreur");
 		if (obj.value != '')
@@ -32,7 +33,7 @@
 
 	<input type="hidden" name="uneErreur" value="${MesErreurs}"
 		id="id_erreur">
-	<form method="post" action="Controleur" onsubmit="return verif();">
+	<form method="post" action="Controleur"><!-- 	 onsubmit="return verif();"> -->
 		<input type="hidden" name="type" value="cherche" id="type" /> <input
 			type="hidden" name="action" value="chercheStage" />
 		<table>
@@ -69,8 +70,8 @@
 <!-- 			</tr> -->
 			<!-- Boutons Ajouter/Reset -->
 			<tr>
-				<td colspan="2"><input type="submit" name="cherche"
-					value="Cherche" /> &nbsp;&nbsp; <input type="reset" name="reset"
+				<td colspan="2"><input type="submit" name="recherche"
+					value="Recherche" /> &nbsp;&nbsp; <input type="reset" name="reset"
 					value="Reset" /></td>
 			</tr>
 		</table>

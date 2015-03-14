@@ -107,7 +107,7 @@ public class Controleur extends HttpServlet {
 				request.setAttribute("rechercherStage", 1);
 				Stage unStage = new Stage();
 				request.setAttribute("stage", unStage);
-
+				
 				unStage.setId(request.getParameter("id"));
 //				unStage.setLibelle(request.getParameter("libelle"));
 //				unStage.setDatedebut(conversionChaineenDate(

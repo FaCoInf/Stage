@@ -155,9 +155,9 @@ public class Stage {
 			// String np = Integer.toString(this.nbplaces);
 			// String ni = Integer.toString(this.nbinscrits);
 
-			mysql = "SELECT * FROM stages WHERE "; // WHERE ";
-			if (this.getId() != null)
-				mysql = mysql + "id=" + this.getId();
+			mysql = "SELECT * FROM stages"; // WHERE ";
+			if (this.getId() != "" && this.getId() != null)
+				mysql = mysql + " WHERE id=" + this.getId();
 			// if( this.getLibelle()!= null){
 			// mysql = mysql + "libelle=" + this.getLibelle();
 			// }
