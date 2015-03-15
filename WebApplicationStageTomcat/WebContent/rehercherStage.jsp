@@ -5,6 +5,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+<!-- <link href="ressources/stylesheets/bootstrap/css/united.min.css" -->
+<!-- 	rel="stylesheet" /> -->
+<link href="ressources/stylesheets/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="ressources/stylesheets/css/style.css" rel="stylesheet">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Rechercher un stage</title>
 
@@ -17,7 +24,24 @@
 </script>
 </head>
 <body onLoad="Chargement();">
- <P><A href="index.jsp"><FONT face="Arial" color="#004080">Retour Accueil</FONT></A></P>
+<!-- Conteneur principal -->
+	<div class="container">
+
+		<!-- Entete -->
+		<div class="page-header">
+			<h1>
+				<a href="index.jsp">Gestion des Stages HIGH TECH</a>
+			</h1>
+		</div>
+		
+		<!--File d'ariane -->
+		<ol class="breadcrumb">
+		  <li><a href="index.jsp">Retour Accueil</a></li>
+		  <li class="active">Recherche de Stage</li>
+		</ol>
+		
+		<!-- Contenu -->
+		
 	<h1>Formulaire de recherche d'un stage</h1>
 	<br>
 
@@ -102,5 +126,6 @@
 			</tr>
 		</c:forEach>
 	</TABLE>
+	</div>
 </body>
 </html>

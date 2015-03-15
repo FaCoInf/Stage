@@ -5,26 +5,57 @@
 <html>
 <head>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!-- <link href="css/united.min.css" rel="stylesheet" /> -->
-<link href="ressources/stylesheets/bootstrap/css/united.min.css" rel="stylesheet" />
-</head>
+<!-- <link href="ressources/stylesheets/bootstrap/css/united.min.css" -->
+<!-- 	rel="stylesheet" /> -->
+<link href="ressources/stylesheets/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="ressources/stylesheets/css/style.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Gestion des stages</title></head>
 <body>
-				<H1>Gestion des Stages HIGH TECH</H1>
-				<BR> <BR>
-				<H2>
-					Nous sommes le
-					<%=DateFormat.getDateTimeInstance(DateFormat.FULL,
-					DateFormat.FULL).format(new Date())%>
-				</H2>
-<div class="col-md-2">
-  <div class="list-group">
-    
-    <a class="list-group-item" href="Controleur?action=saisieStage">Saisie d'un stage</a>
-    <a class="list-group-item" href="Controleur?action=afficheStage">Affichage de la liste des stages</a>
-    <a class="list-group-item" href="Controleur?action=rechercheStage">Recherche d'un stage</a>
-    <a class="list-group-item" href="Controleur?action=saisieModifierStage">Modifie un stage</a>
-    <a class="list-group-item" href="Controleur?action=saisieSupprimerStage">SSupprime un stage</a>
-  </div>
-</div>
+	<!-- Conteneur principal -->
+	<div class="container">
+
+		<!-- Entete -->
+		<div class="page-header">
+			<h1>
+				<a href="#">Gestion des Stages HIGH TECH</a> <small><%=DateFormat.getDateTimeInstance(DateFormat.FULL,
+					DateFormat.FULL).format(new Date())%></small>
+			</h1>
+		</div>
+
+		<!-- Barre de navigation -->
+		<div class="navbar-collapse collapse">
+			<ul class="nav nav-justified">
+				<li><a href="Controleur?action=saisieStage">Saisie d'un
+						stage</a></li>
+				<li><a href="Controleur?action=afficheStage">Affichage de
+						la liste des stages</a></li>
+				<li><a href="Controleur?action=rechercheStage">Recherche
+						d'un stage</a></li>
+				<li><a href="Controleur?action=saisieModifierStage">Modifie
+						un stage</a></li>
+				<li><a href="Controleur?action=saisieSupprimerStage">Supprime
+						un stage</a></li>
+			</ul>
+		</div>
+		
+		<!-- Contenu -->
+		<section class="row">
+        <div class="col-lg-12">
+	        <figure>
+	          <img class="img-responsive center-block" src="ressources/pictures/stage.jpg" alt="Image de stage" />
+	          <figcaption><!-- Legende associe --></figcaption>
+	        </figure>
+        </div>
+        </section>
+        
+<!--         <footer class="row"> -->
+<!--         <div class="col-sm-12"> -->
+<!--           Pied de page -->
+<!--         </div> -->
+<!--       </footer> -->
+		
+	</div>
 </body>
 </html>
