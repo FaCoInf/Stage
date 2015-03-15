@@ -5,8 +5,6 @@
 <html>
 <head>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!-- <link href="ressources/stylesheets/bootstrap/css/united.min.css" -->
-<!-- 	rel="stylesheet" /> -->
 <link href="ressources/stylesheets/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
 <link href="ressources/stylesheets/css/style.css" rel="stylesheet">

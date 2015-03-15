@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.Date,java.text.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,108 +25,144 @@
 </script>
 </head>
 <body onLoad="Chargement();">
-<!-- Conteneur principal -->
+	<!-- Conteneur principal -->
 	<div class="container">
 
 		<!-- Entete -->
 		<div class="page-header">
 			<h1>
-				<a href="index.jsp">Gestion des Stages HIGH TECH</a>
+				<a href="index.jsp">Gestion des Stages HIGH TECH</a> <small><%=DateFormat.getDateTimeInstance(DateFormat.FULL,
+					DateFormat.FULL).format(new Date())%></small>
 			</h1>
 		</div>
-		
+
+		<!-- Barre de navigation -->
+		<div class="navbar-collapse collapse">
+			<ul class="nav nav-justified">
+				<li><a href="Controleur?action=saisieStage">Saisie d'un
+						stage</a></li>
+				<li><a href="Controleur?action=afficheStage">Affichage de
+						la liste des stages</a></li>
+				<li><a href="Controleur?action=rechercheStage">Recherche
+						d'un stage</a></li>
+				<li><a href="Controleur?action=saisieModifierStage">Modifie
+						un stage</a></li>
+				<li><a href="Controleur?action=saisieSupprimerStage">Supprime
+						un stage</a></li>
+			</ul>
+		</div>
+
 		<!--File d'ariane -->
 		<ol class="breadcrumb">
-		  <li><a href="index.jsp">Retour Accueil</a></li>
-		  <li class="active">Recherche de Stage</li>
+			<li><a href="index.jsp">Retour Accueil</a></li>
+			<li class="active">Recherche de Stage</li>
 		</ol>
-		
+
 		<!-- Contenu -->
-		
-	<h1>Formulaire de recherche d'un stage</h1>
-	<br>
+		<section class="row">
+			<h2 class="text-center">Formulaire de recherche d'un stage</h2>
+			<input type="hidden" name="uneErreur" value="${MesErreurs}"
+				id="id_erreur">
+			<form class="form-horizontal" method="post" action="Controleur">
+				<input type="hidden" name="type" value="cherche" id="type" /> <input
+					type="hidden" name="action" value="chercheStage" />
+	
+				<!-- input fields -->
+				<div class="form-group">
+					<label class="col-sm-4 col-md-5 control-label">Numéro</label>
+					<div class="col-sm-6 col-md-4">
+						<input type="text" name="id" value="${stage.id}" id="id"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 col-md-5 control-label">Libellé</label>
+					<div class="col-sm-6 col-md-4">
+						<input type="text" name="libelle" value="${stage.libelle}"
+							id="libelle" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 col-md-5 control-label">Date de début
+						du stage</label>
+					<div class="col-sm-6 col-md-4">
+						<input type="text" name="datedebut"
+							value="<fmt:formatDate type="both" dateStyle="short"
+								timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />"
+							id="datedebut" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 col-md-5 control-label">Date de fin
+						de stage</label>
+					<div class="col-sm-6 col-md-4">
+						<input type="text" name="datefin"
+							value="<fmt:formatDate type="both" dateStyle="short"
+								timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
+							id="datefin" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 col-md-5 control-label">Nombre de
+						places</label>
+					<div class="col-sm-6 col-md-4">
+						<input type="text" name="nbplaces" value="" id="nbplaces"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 col-md-5 control-label">Nombre
+						d'inscrits</label>
+					<div class="col-sm-6 col-md-4">
+						<input type="text" name="nbinscrits" value="" id="nbinscrits"
+							class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-6 col-sm-offset-4 col-md-4 col-md-offset-5">
+						<button type="submit" name="recherche"
+							class="btn btn-default btn-primary">
+							Recherche <span class="glyphicon glyphicon-search"></span>
+						</button>
+						<button type="reset" name="reset"
+							class="btn btn-default btn-primary">Reset</button>
+					</div>
+				</div>
+			</form>
+		</section>
 
-	<input type="hidden" name="uneErreur" value="${MesErreurs}"
-		id="id_erreur">
-	<form method="post" action="Controleur">
-		<input type="hidden" name="type" value="cherche" id="type" /> <input
-			type="hidden" name="action" value="chercheStage" />
-		<table>
-			<!-- input fields -->
-			<tr>
-				<td>Numéro</td>
-				<td><input type="text" name="id" value="${stage.id}" id="id" /></td>
-			</tr>
-			<tr>
-				<td>Libellé</td>
-				<td><input type="text" name="libelle" value="${stage.libelle}"
-					id="libelle" /></td>
-			</tr>
-			<tr>
-				<td>Date de début du stage</td>
-				<td><input type="text" name="datedebut"
-					value="<fmt:formatDate type="both" dateStyle="short"
-						timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />" id="datedebut"/></td>
-			</tr>
-			<tr>
-				<td>Date de fin de stage</td>
-				<td><input type="text" name="datefin" value="<fmt:formatDate type="both" dateStyle="short"
-						timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
-					id="datefin" /></td>
-			</tr>
-
-			<tr>
-				<td>Nombre de places</td>
-				<td><input type="text" name="nbplaces"
-					value="" id="nbplaces" /></td>
-			</tr>
-			<tr>
-				<td>Nombre d'inscrits</td>
-				<td><input type="text" name="nbinscrits"
-					value="" id="nbinscrits" /></td>
-			</tr>
-			<!-- Boutons Ajouter/Reset -->
-			<tr>
-				<td colspan="2"><input type="submit" name="recherche"
-					value="Recherche" /> &nbsp;&nbsp; <input type="reset" name="reset"
-					value="Reset" /></td>
-			</tr>
-		</table>
-	</form>
-
-	<STRONG>Résultat(s) de la recherche : </STRONG>
-	</U>
-	</FONT>
-	</P>
-
-	<TABLE BORDER="1">
-		<CAPTION>Tableau des Stages</CAPTION>
-		<TR>
-			<TH>Numero</TH>
-			<TH>Libellé</TH>
-			<TH>Date début</TH>
-			<TH>Date fin</TH>
-			<TH>Nombre de places</TH>
-			<TH>Nombre d'inscrits</TH>
-		</TR>
-
-		<c:forEach items="${liste}" var="item">
-			<tr>
-				<td>${item.id}</td>
-				<td>${item.libelle}</td>
-				<td><fmt:formatDate type="both" dateStyle="short"
-						timeStyle="short" value="${item.datedebut}" pattern="dd/MM/yyyy" />
-				</td>
-				<td><fmt:formatDate type="both" dateStyle="short"
-						timeStyle="short" value="${item.datefin}" pattern="dd/MM/yyyy" />
-				</td>
-
-				<td>${item.nbplaces}</td>
-				<td>${item.nbinscrits}</td>
-
-			</tr>
-		</c:forEach>
-	</TABLE>
+		<section class="row">
+			<h3>Résultat(s) de la recherche :</h3>
+			<table class="table table-bordered">
+				<!-- 				<CAPTION>Tableau des Stages</CAPTION> -->
+				<thead>
+					<tr>
+						<th data-field="id" class="col-md-2">Numero</th>
+						<th data-field="libelle" class="col-md-2">Libellé</th>
+						<th data-field="datedebut" class="col-md-2">Date début</th>
+						<th data-field="datefin" class="col-md-2">Date fin</th>
+						<th data-field="nbplaces" class="col-md-2">Nombre de places</th>
+						<th data-field="nbinscrits" class="col-md-2">Nombre d'inscrits</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${liste}" var="item">
+						<tr>
+							<td>${item.id}</td>
+							<td>${item.libelle}</td>
+							<td><fmt:formatDate type="both" dateStyle="short"
+									timeStyle="short" value="${item.datedebut}" pattern="dd/MM/yyyy" />
+							</td>
+							<td><fmt:formatDate type="both" dateStyle="short"
+									timeStyle="short" value="${item.datefin}" pattern="dd/MM/yyyy" />
+							</td>
+							<td>${item.nbplaces}</td>
+							<td>${item.nbinscrits}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</section>
 	</div>
 </body>
 </html>
