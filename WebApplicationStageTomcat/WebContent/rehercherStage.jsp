@@ -7,8 +7,6 @@
 <html>
 <head>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!-- <link href="ressources/stylesheets/bootstrap/css/united.min.css" -->
-<!-- 	rel="stylesheet" /> -->
 <link href="ressources/stylesheets/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
 <link href="ressources/stylesheets/css/style.css" rel="stylesheet">
@@ -38,16 +36,16 @@
 
 		<!-- Barre de navigation -->
 		<div class="navbar-collapse collapse">
-			<ul class="nav nav-justified">
-				<li><a href="Controleur?action=saisieStage">Saisie d'un
+			<ul class="nav nav-pills nav-justified">
+				<li role="presentation" ><a href="Controleur?action=saisieStage">Saisie d'un
 						stage</a></li>
-				<li><a href="Controleur?action=afficheStage">Affichage de
+				<li role="presentation" ><a href="Controleur?action=afficheStage">Affichage de
 						la liste des stages</a></li>
-				<li><a href="Controleur?action=rechercheStage">Recherche
+				<li role="presentation"  class="active"><a href="Controleur?action=rechercheStage">Recherche
 						d'un stage</a></li>
-				<li><a href="Controleur?action=saisieModifierStage">Modifie
+				<li role="presentation" ><a href="Controleur?action=saisieModifierStage">Modifie
 						un stage</a></li>
-				<li><a href="Controleur?action=saisieSupprimerStage">Supprime
+				<li role="presentation" ><a href="Controleur?action=saisieSupprimerStage">Supprime
 						un stage</a></li>
 			</ul>
 		</div>
@@ -60,66 +58,63 @@
 
 		<!-- Contenu -->
 		<section class="row">
-			<h2 class="text-center">Formulaire de recherche d'un stage</h2>
+			<h2 class="text-center">Recherche d'un stage</h2>
+			<br>
 			<input type="hidden" name="uneErreur" value="${MesErreurs}"
 				id="id_erreur">
-			<form class="form-horizontal" method="post" action="Controleur">
+			<form class="form-inline" method="post" action="Controleur">
 				<input type="hidden" name="type" value="cherche" id="type" /> <input
 					type="hidden" name="action" value="chercheStage" />
 	
 				<!-- input fields -->
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Numéro</label>
-					<div class="col-sm-6 col-md-4">
+					<label>Numéro</label>
+					<div>
 						<input type="text" name="id" value="${stage.id}" id="id"
 							class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Libellé</label>
-					<div class="col-sm-6 col-md-4">
+					<label>Libellé</label>
+					<div>
 						<input type="text" name="libelle" value="${stage.libelle}"
 							id="libelle" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Date de début
-						du stage</label>
-					<div class="col-sm-6 col-md-4">
+					<label>Date de début du stage</label>
+					<div>
 						<input type="text" name="datedebut"
 							value="<fmt:formatDate type="both" dateStyle="short"
-								timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />"
+									timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />"
 							id="datedebut" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Date de fin
-						de stage</label>
-					<div class="col-sm-6 col-md-4">
+					<label>Date de fin de stage</label>
+					<div>
 						<input type="text" name="datefin"
 							value="<fmt:formatDate type="both" dateStyle="short"
-								timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
+									timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
 							id="datefin" class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Nombre de
-						places</label>
-					<div class="col-sm-6 col-md-4">
+					<label>Nombre de places</label>
+					<div>
 						<input type="text" name="nbplaces" value="" id="nbplaces"
 							class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Nombre
-						d'inscrits</label>
-					<div class="col-sm-6 col-md-4">
+					<label>Nombre d'inscrits</label>
+					<div>
 						<input type="text" name="nbinscrits" value="" id="nbinscrits"
 							class="form-control" />
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-6 col-sm-offset-4 col-md-4 col-md-offset-5">
+					<div>
 						<button type="submit" name="recherche"
 							class="btn btn-default btn-primary">
 							Recherche <span class="glyphicon glyphicon-search"></span>

@@ -24,16 +24,16 @@
 
 		<!-- Barre de navigation -->
 		<div class="navbar-collapse collapse">
-			<ul class="nav nav-justified">
-				<li><a href="Controleur?action=saisieStage">Saisie d'un
+			<ul class="nav nav-pills nav-justified">
+				<li role="presentation"><a href="Controleur?action=saisieStage">Saisie d'un
 						stage</a></li>
-				<li><a href="Controleur?action=afficheStage">Affichage de
+				<li role="presentation"><a href="Controleur?action=afficheStage">Affichage de
 						la liste des stages</a></li>
-				<li><a href="Controleur?action=rechercheStage">Recherche
+				<li role="presentation"><a href="Controleur?action=rechercheStage">Recherche
 						d'un stage</a></li>
-				<li><a href="Controleur?action=saisieModifierStage">Modifie
+				<li role="presentation"><a href="Controleur?action=saisieModifierStage">Modifie
 						un stage</a></li>
-				<li><a href="Controleur?action=saisieSupprimerStage">Supprime
+				<li role="presentation"><a href="Controleur?action=saisieSupprimerStage">Supprime
 						un stage</a></li>
 			</ul>
 		</div>
