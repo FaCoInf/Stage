@@ -101,7 +101,7 @@ public class Controleur extends HttpServlet {
 				Stage unStage = new Stage();
 				request.setAttribute("stage", unStage);
 
-				// Récupération des attributs de la recherche
+				// Rï¿½cupï¿½ration des attributs de la recherche
 				if(request.getParameter("id") != "")
 					unStage.setId(request.getParameter("id"));
 				if(request.getParameter("libelle") != "")
@@ -161,6 +161,9 @@ public class Controleur extends HttpServlet {
 			destinationPage = "/index.jsp";
 		}else if(SAISIE_SUPPRIMER_STAGE.equals(actionName)){
 			System.out.println("Saisie supprimer stage");
+			Stage unStage = new Stage();
+			listeStages = unStage.rechercheLesStages();
+			request.setAttribute("liste", listeStages);
 			request.setAttribute("stage", new Stage());
 			destinationPage = "/suppressionStage.jsp";
 		}else if(SUPPRIMER_STAGE.equals(actionName)){

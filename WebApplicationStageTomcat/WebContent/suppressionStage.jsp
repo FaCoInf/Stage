@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.Date,java.text.*"%>
@@ -72,17 +73,24 @@
 			id="id_erreur">
 		<form class="form-horizontal" method="post" action="Controleur"
 			onsubmit="return verif();">
-			<input type="hidden" name="type" value="supprimer" id="type" /> 
-			<input type="hidden" name="action" value="supprimerStage" />
+			<input type="hidden" name="type" value="supprimer" id="type" /> <input
+				type="hidden" name="action" value="supprimerStage" />
 
-			<!-- input fields -->
-			<div class="form-group">
-				<label class="col-sm-4 col-md-5 control-label">Numéro</label>
-				<div class="col-sm-6 col-md-4">
-					<input type="text" name="id" value="${stage.id}" id="id"
-						class="form-control" />
-				</div>
-			</div>
+<!-- 			<!-- input fields --> -->
+<!-- 			<div class="form-group"> -->
+<!-- 				<label class="col-sm-4 col-md-5 control-label">Numéro</label> -->
+<!-- 				<div class="col-sm-6 col-md-4"> -->
+<%-- 					<input type="text" name="id" value="${stage.id}" id="id" --%>
+<!-- 						class="form-control" /> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+
+			<label for="sel1">Séléctionner un stage à supprimer :</label> 
+			<select	class="form-control" name="id"  id="id">
+				<c:forEach items="${liste}" var="item">
+					<option value="${item.id}">${item.id} : ${item.libelle}</option>	
+				</c:forEach>
+			</select>
 
 			<!-- Boutons Ajouter/Reset -->
 			<div class="form-group">
