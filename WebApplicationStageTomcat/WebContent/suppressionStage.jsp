@@ -74,21 +74,11 @@
 		<form class="form-horizontal" method="post" action="Controleur"
 			onsubmit="return verif();">
 			<input type="hidden" name="type" value="supprimer" id="type" /> <input
-				type="hidden" name="action" value="supprimerStage" />
-
-<!-- 			<!-- input fields --> -->
-<!-- 			<div class="form-group"> -->
-<!-- 				<label class="col-sm-4 col-md-5 control-label">Numéro</label> -->
-<!-- 				<div class="col-sm-6 col-md-4"> -->
-<%-- 					<input type="text" name="id" value="${stage.id}" id="id" --%>
-<!-- 						class="form-control" /> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-
-			<label for="sel1">Séléctionner un stage à supprimer :</label> 
-			<select	class="form-control" name="id"  id="id">
+				type="hidden" name="action" value="supprimerStage" /> <label
+				for="sel1">Séléctionner un stage à supprimer :</label> <select
+				class="form-control" name="id" id="id">
 				<c:forEach items="${liste}" var="item">
-					<option value="${item.id}">${item.id} : ${item.libelle}</option>	
+					<option value="${item.id}">${item.id}: ${item.libelle}</option>
 				</c:forEach>
 			</select>
 

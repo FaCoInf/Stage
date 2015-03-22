@@ -140,6 +140,9 @@ public class Controleur extends HttpServlet {
 
 		} else if (SAISIE_MODIFIER_STAGE.equals(actionName)) {
 			System.out.println("Saisie Modifier stage");
+			Stage unStage = new Stage();
+			listeStages = unStage.rechercheLesStages();
+			request.setAttribute("liste", listeStages);
 			request.setAttribute("stage", new Stage());
 			destinationPage = "/modificationStage.jsp";
 		} else if (MODIFIER_STAGE.equals(actionName)) {
