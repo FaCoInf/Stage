@@ -3,6 +3,7 @@ package controle;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -29,6 +30,7 @@ public class Controleur extends HttpServlet {
 	private static final String SAISIE_MODIFIER_STAGE = "saisieModifierStage";
 	private static final String MODIFIER_STAGE = "modifierStage";
 	private static final String SAISIE_SUPPRIMER_STAGE = "saisieSupprimerStage";
+	private static final String MODIFIER_UN_STAGE = "modifierunstage";
 	private static final String SUPPRIMER_STAGE = "supprimerStage";
 	private static final String ERROR_PAGE = null;
 
@@ -145,15 +147,27 @@ public class Controleur extends HttpServlet {
 			request.setAttribute("liste", listeStages);
 			request.setAttribute("stage", new Stage());
 			destinationPage = "/modificationStage.jsp";
-		} else if (MODIFIER_STAGE.equals(actionName)) {
+		}else if(MODIFIER_UN_STAGE.equals(actionName)) {
+			Stage unStage = new Stage();
+			unStage.setId(request.getParameter("idselect"));
+			unStage.setNbinscrits(-1);
+			unStage.setNbplaces(-1);
+			Stage stage = unStage.rechercheDesStages().get(0);
+			request.setAttribute("stage", stage);
+			listeStages = unStage.rechercheLesStages();
+			request.setAttribute("liste", listeStages);
+			destinationPage = "/modificationStage.jsp";
+		}
+		else if (MODIFIER_STAGE.equals(actionName)) {
 			System.out.println("Modifier stage");
 			Stage unStage = new Stage();
 			unStage.setId(request.getParameter("id"));
 			unStage.setLibelle(request.getParameter("libelle"));
+			
 			unStage.setDatedebut(conversionChaineenDate(
-					request.getParameter("datedebut"), "yyyy/MM/dd"));
+					request.getParameter("datedebut"), "dd/MM/yyyy"));
 			unStage.setDatefin(conversionChaineenDate(
-					request.getParameter("datefin"), "yyyy/MM/dd"));
+					request.getParameter("datefin"), "dd/MM/yyyy"));
 			unStage.setNbplaces(Integer.parseInt(request
 					.getParameter("nbplaces")));
 			unStage.setNbinscrits(Integer.valueOf(

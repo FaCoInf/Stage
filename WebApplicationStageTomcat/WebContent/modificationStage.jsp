@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page import="java.util.Date,java.text.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,18 +28,17 @@
 			alert('Erreur signalée  : "' + obj.value + "'");
 	}
 	function recupere() {
-// 		document.formulaire.choix.value = id.options[liste.selectedIndex].value;
-// 		document.getElementById('id').options[id.selectedIndex].;
+		// 		document.formulaire.choix.value = id.options[liste.selectedIndex].value;
+		// 		document.getElementById('id').options[id.selectedIndex].;
 
 		/**On récupère l'élement html <select>*/
 		var selectElmt = document.getElementById(id).selectedIndex.value;
 		/**
 		selectElmt.options correspond au tableau des balises <option> du select
 		selectElmt.selectedIndex correspond à l'index du tableau options qui est actuellement sélectionné
-		*/
-		
-// 		var elt = selectElmt.options[selectElmt.selectedIndex].value;
-	
+		 */
+
+		// 		var elt = selectElmt.options[selectElmt.selectedIndex].value;
 	}
 </script>
 </head>
@@ -83,15 +83,22 @@
 
 
 		<!-- Contenu -->
-		<select class="form-control" name="id" id="id">
-			<c:forEach items="${liste}" var="item">
-				<option value="${item.id}">${item.id}:${item.libelle}</option>
-			</c:forEach>
-		</select>
-
-		<button type="submit" name="modificationStage"
-			class="btn btn-default btn-primary" onclick="recupere();">Modifier ce stage</button>
-
+		<!-- 		<form class="form-horizontal" method="post" action="Controleur"> -->
+		<form class="form-horizontal" method="post" action="Controleur">
+			<input type="hidden" name="type" value="modifierunstage" id="type" />
+			<input type="hidden" name="action" value="modifierunstage" />
+			<div class="form-group">
+				<select class="form-control" name="idselect" id="idselect">
+					<c:forEach items="${liste}" var="item">
+						<option value="${item.id}">${item.id}:${item.libelle}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="submit" name="modifierunstage"
+					class="btn btn-default btn-primary">Modifier ce stage</button>
+			</div>
+		</form>
 		<section class="row">
 		<h2 class="text-center">Formulaire de modification d'un stage</h2>
 		<input type="hidden" name="uneErreur" value="${MesErreurs}"
@@ -120,16 +127,20 @@
 				<label class="col-sm-4 col-md-5 control-label">Date de début
 					du stage</label>
 				<div class="col-sm-6 col-md-4">
-					<input type="text" name="datedebut" value="${stage.datedebut}"
-						pattern="dd/MM/yyyy" id="datedebut" class="form-control" />
+					<input type="text" name="datedebut"
+						value="<fmt:formatDate type="both" dateStyle="short"
+         timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />"
+						id="datedebut" class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-4 col-md-5 control-label">Date de fin
 					de stage</label>
 				<div class="col-sm-6 col-md-4">
-					<input type="text" name="datefin" value="${stage.datefin}"
-						pattern="dd/MM/yyyy" id="datefin" class="form-control" />
+					<input type="text" name="datefin"
+						value="<fmt:formatDate type="both" dateStyle="short"
+         timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
+						id="datefin" class="form-control" />
 				</div>
 			</div>
 			<div class="form-group">
