@@ -68,14 +68,14 @@
 
 		<!-- Contenu -->
 		<section class="row">
-		<h2 class="text-center">Formulaire de suppression d'un stage</h2>
+		<h2 class="text-center">Suppression d'un stage</h2>
 		<input type="hidden" name="uneErreur" value="${MesErreurs}"
 			id="id_erreur">
 		<form class="form-horizontal" method="post" action="Controleur"
 			onsubmit="return verif();">
 			<input type="hidden" name="type" value="supprimer" id="type" /> <input
 				type="hidden" name="action" value="supprimerStage" /> <label
-				for="sel1">Séléctionner un stage à supprimer :</label> <select
+				for="sel1">Séléctionnez un stage à supprimer :</label> <select
 				class="form-control" name="id" id="id">
 				<c:forEach items="${liste}" var="item">
 					<option value="${item.id}">${item.id}: ${item.libelle}</option>

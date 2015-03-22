@@ -91,6 +91,9 @@
 			<input type="hidden" name="type" value="modifierunstage" id="type" />
 			<input type="hidden" name="action" value="modifierunstage" />
 			<div class="form-group">
+			<h2 class="text-center">Modification d'un stage</h2>
+			<label
+				for="sel1">Séléctionnez un stage à modifier :</label> 
 				<select class="form-control" name="idselect" id="idselect">
 					<c:forEach items="${liste}" var="item">
 						<option value="${item.id}">${item.id}:${item.libelle}</option>
@@ -103,7 +106,7 @@
 			</div>
 		</form>
 		<section class="row">
-		<h2 class="text-center">Formulaire de modification d'un stage</h2>
+		
 		<input type="hidden" name="uneErreur" value="${MesErreurs}"
 			id="id_erreur">
 		<form class="form-horizontal" method="post" action="Controleur"
