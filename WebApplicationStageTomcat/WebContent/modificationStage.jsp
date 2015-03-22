@@ -13,11 +13,14 @@
 
 <script language=javascript>
 	function verif() {
-		if (document.getElementById("id").value == ""
-				|| document.getElementById("libelle").value == ""
+		if (document.getElementById("id").value == "") {
+			alert("Veuillez sélectionner un stage");
+			return false;
+		}
+		if (document.getElementById("libelle").value == ""
 				|| document.getElementById("datedebut").value == ""
 				|| document.getElementById("datefin").value == "") {
-			alert("Un des champs n'est pas rempli !");
+			alert("Veuillez remplir tous les champs");
 			return false;
 		} else
 			return true;
@@ -110,9 +113,9 @@
 
 			<!-- input fields -->
 			<div class="form-group">
-				<label class="col-sm-4 col-md-5 control-label">Numéro</label>
+				<!-- 				<label class="col-sm-4 col-md-5 control-label">Numéro</label> -->
 				<div class="col-sm-6 col-md-4">
-					<input type="text" name="id" value="${stage.id}" id="id"
+					<input type="hidden" name="id" value="${stage.id}" id="id"
 						class="form-control" />
 				</div>
 			</div>

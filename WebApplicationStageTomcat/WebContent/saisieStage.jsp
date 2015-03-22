@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.Date,java.text.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -97,23 +98,25 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Date de début
-						du stage</label>
-					<div class="col-sm-6 col-md-4">
-						<input type="text" name="datedebut"
-							value="${stage.datedebut}" pattern="dd/MM/yyyy"
-							id="datedebut" class="form-control" />
-					</div>
+				<label class="col-sm-4 col-md-5 control-label">Date de début
+					du stage</label>
+				<div class="col-sm-6 col-md-4">
+					<input type="text" name="datedebut"
+						value="<fmt:formatDate type="both" dateStyle="short"
+         timeStyle="short" value="${stage.datedebut}" pattern="dd/MM/yyyy" />"
+						id="datedebut" class="form-control" />
 				</div>
-				<div class="form-group">
-					<label class="col-sm-4 col-md-5 control-label">Date de fin
-						de stage</label>
-					<div class="col-sm-6 col-md-4">
-						<input type="text" name="datefin"
-							value="${stage.datefin}" pattern="dd/MM/yyyy"
-							id="datefin" class="form-control" />
-					</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-4 col-md-5 control-label">Date de fin
+					de stage</label>
+				<div class="col-sm-6 col-md-4">
+					<input type="text" name="datefin"
+						value="<fmt:formatDate type="both" dateStyle="short"
+         timeStyle="short" value="${stage.datefin}" pattern="dd/MM/yyyy" />"
+						id="datefin" class="form-control" />
 				</div>
+			</div>
 				<div class="form-group">
 					<label class="col-sm-4 col-md-5 control-label">Nombre de
 						places</label>
